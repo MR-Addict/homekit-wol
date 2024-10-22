@@ -2,16 +2,18 @@
 
 This is an ESP32 homespan project that allows you to wake up your PC from sleep using Apple HomeKit.
 
-## Setup
+## Add to your Home app
 
-Add to your HomeKit:
+Follow up the serial output to setup your WiFi network and add to your Home app.
 
-Default pair pin is **HSPN**, and pair code is **466-37-726**, [reference](https://github.com/HomeSpan/HomeSpan/blob/master/docs/QRCodes.md)
+Default pair pin is **HSPN**, and default pair code is **466-37-726**.
 
-Setup your to be woken up PC MAC:
+[Reference](https://github.com/HomeSpan/HomeSpan/blob/master/docs/QRCodes.md)
+
+## Setup your PC MAC
 
 Use @m command to set your PC MAC address, for example:
 
-```
+```sh
 @m 74:56:3C:D3:65:74
 ```
