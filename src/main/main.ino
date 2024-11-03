@@ -8,7 +8,6 @@ WiFiUDP UDP;
 WakeOnLan WOL(UDP);
 Preferences preferences;
 
-#include "utils.h"
 #include "hswol.h"
 
 void setup() {
@@ -19,14 +18,20 @@ void setup() {
   homeSpan.enableOTA("ota");
   homeSpan.begin(Category::Switches, "HSWOL", "HomeSpan-HSWOL");
 
-  // 设置默认的参数信息
+  // 设置第一台设备
   new SpanAccessory();
   new Service::AccessoryInformation();
   new Characteristic::Identify();
-  new HSWOL();
+  new HSWOL("E0:51:D8:11:3D:CE");
 
-  new SpanUserCommand('m', "<mac> - set MAC address", setMacCommand);  // 设置终端命令
-  homeSpan.autoPoll();                                                 // 后台自动更新
+  // 设置第二台设备
+  new SpanAccessory();
+  new Service::AccessoryInformation();
+  new Characteristic::Identify();
+  new HSWOL("74:56:3C:D3:65:74");
+
+  // 后台自动更新
+  homeSpan.autoPoll();
 }
 
 void loop() {}

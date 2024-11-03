@@ -1,22 +1,22 @@
 struct HSWOL : Service::Switch {
+private:
+  const char* mac;
   SpanCharacteristic* power;
 
-  HSWOL()
+public:
+  HSWOL(const char* mac)
     : Service::Switch() {
+    this->mac = mac;
     power = new Characteristic::On();
   }
 
   boolean update() {
     // 检查 HomeKit 是否发送了一个开机的请求
     if (power->getNewVal()) {
-      const String mac = preferences.getString("mac");
-      if (isValidMacAddress(mac.c_str())) {
-        Serial.println("Waking up machine: " + mac);
-        WOL.calculateBroadcastAddress(WiFi.localIP(), WiFi.subnetMask());
-        WOL.sendMagicPacket(mac.c_str());
-      } else return false;  // MAC 地址不合法直接返回false
+      Serial.println(String("Waking up machine: ") + mac);
+      WOL.calculateBroadcastAddress(WiFi.localIP(), WiFi.subnetMask());
+      return WOL.sendMagicPacket(mac);
     }
-    return true;
   }
 
   void loop() {
