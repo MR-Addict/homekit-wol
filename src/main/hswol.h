@@ -16,7 +16,7 @@ public:
       Serial.println(String("Waking up machine: ") + mac);
       WOL.calculateBroadcastAddress(WiFi.localIP(), WiFi.subnetMask());
       return WOL.sendMagicPacket(mac);
-    }
+    } else return false;
   }
 
   void loop() {
