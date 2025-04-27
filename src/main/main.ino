@@ -18,13 +18,13 @@ void setup() {
   homeSpan.enableOTA("ota");
   homeSpan.begin(Category::Switches, "HSWOL", "HomeSpan-HSWOL");
 
-  // 设置第一台设备
+  // 设置第一台设备（PVE主机）
   new SpanAccessory();
   new Service::AccessoryInformation();
   new Characteristic::Identify();
   new HSWOL("E0:51:D8:11:3D:CE");
 
-  // 设置第二台设备
+  // 设置第二台设备（出租屋电脑）
   new SpanAccessory();
   new Service::AccessoryInformation();
   new Characteristic::Identify();
